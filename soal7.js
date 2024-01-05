@@ -1,22 +1,16 @@
 // no 7
 function decryptMessage(encryptedMessage, shift) {
     const alphabet = "abcdefghijklmnopqrstuvwxyz";
-    const encryptedLower = encryptedMessage.toLowerCase();
-    let decryptedMessage = "";
-
+    var output = "";
     for (let i = 0; i < encryptedMessage.length; i++) {
-        const char = encryptedMessage[i];
-        if (alphabet.indexOf(char.toLowerCase()) !== -1) {
-            const isUpperCase = char === char.toUpperCase();
-            const index = (alphabet.indexOf(encryptedLower[i]) - shift + 26) % 26;
-            const decryptedChar = isUpperCase ? alphabet[index].toUpperCase() : alphabet[index];
-            decryptedMessage += decryptedChar;
-        } else {
-            decryptedMessage += char;
+        var char = (alphabet.toLowerCase().indexOf(encryptedMessage[i]) - shift + 26) % 26;
+        if (alphabet.indexOf(encryptedMessage[i]) != -1){
+            output += alphabet[char];
+        }else{
+            output += " ";
         }
     }
-
-    return decryptedMessage;
+    return output
 }
 
 const encryptedMessage1 = "xfqfr bfmdz";

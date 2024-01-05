@@ -1,19 +1,31 @@
-// soal 9
-
-function duplicates(en) {
-    duplicate = []
-    for (let i = 0; i < en.length; i++) {
-        for (let j = i+1; j < en.length; j++) {
-            if(en[i] == en[j]){
-                duplicate.push(en[j]);
-            }
+var sebut = ["Bagas","Dimas","Bagas","Bagas","Indra","Gilang","Gilang","Bagas"]
+var anakNakal = []
+var string = ""
+for (let j = 0; j < sebut.length; j++) {
+    var counter = 1
+    for (let i = 1+1; i < sebut.length; i++) {
+        if(sebut[j] == sebut[i]){
+            counter++
         }
     }
-    if (duplicate.length > 0){
-        return duplicate.join(" dan ") + " Nackal" ;
-    }else{
-        return "Semuanya anak baik";
+    
+    if (counter > 2 && anakNakal.some(e => e.nama == sebut[j]) == false){
+        anakNakal.push({nama:sebut[j], jumlah:counter})
+    }  
+}
+
+anakNakal.sort((a,b)=>b.jumlah-a.jumlah)
+
+for (let k = 0; k < anakNakal.length; k++) {
+    if (string === "" && anakNakal[k+1] != undefined) {
+        string += anakNakal[k].nama + " dan ";
+    } else {
+        string += anakNakal[k].nama + " ";
+    }
+
+    if (anakNakal[k + 1] === undefined) {
+        string += "Nakal";
     }
 }
-console.log("soal no 9");
-console.log(duplicates(["Bagas","Dimas","Bagas"]))
+
+console.log(string)

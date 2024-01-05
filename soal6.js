@@ -1,39 +1,52 @@
-
-// no 6 contoh array to objext
-var list = [
-    {"makanan": [
-        ["Ayam Goreng Krispi",15000],
-        ["Ayam Puk Puk (Bukan di geprek)",13000],
-        ["Ayam bakar",20000],
-    ]},{"minuman" : [
-        ["Es teh",5000],
-        ["Es Jeruk",7000],
-    ]}
-]
-
-list["makanan"] = list[0]["makanan"]
-list["minuman"] = list[1]["minuman"]
-
-
-function countPajak(jumlah,tipe) {
-    switch (tipe) {
-        case "Makanan":
-            return jumlah + (jumlah * 0.05)
-            break;
-        case "Minuman":
-            return jumlah + (jumlah * 0.03)
-            break;
-        case "total":
-            return jumlah + (jumlah * 0.15)
-            break;
-        default:
-            break;
-    }
+var Menu = {
+    makanan : [
+        {nama : "Ayam", harga : 15000},
+        {nama : "Ayam Puk Puk (Bukan digeprek)", harga : 13000},
+        {nama : "Ayam Bakar", harga : 20000}
+    ],
+    minuman : [
+        {nama : "Es Teh", harga : 5000},
+        {nama : "Es Jeruk", harga : 7000},
+    ]
 }
-console.log("soal no 6");
-var totalR = countPajak(countPajak((list["makanan"][2][1])*2,"Makanan") + countPajak(list["minuman"][1][1],"Minuman"),"total");
-console.log("Rehan Whangsap memesan 2 ayam bakar dan 1 esteh totalnya : " + totalR)
-var totalA = countPajak(countPajak(list["makanan"][1][1],"Makanan") + countPajak((list["minuman"][0][1])*3,"Minuman"),"total");
-console.log("Amba roni memesan 1 Ayam puk puk dan 3 esteh : " + totalA)
-var totalW = countPajak(countPajak(list["makanan"][0][1],"Makanan") + countPajak(list["makanan"][1][1],"Makanan") + countPajak(list["makanan"][2][1],"Makanan") + countPajak(list["minuman"][0][1],"Minuman")+ countPajak(list["minuman"][1][1],"Minuman"),"total");
-console.log("Karena Faiz ngawi sangat lapar dia memesan semuanya satu satu : " + totalW)
+
+const pesananRehan = [
+    { jenis: "makanan", nama: "Ayam Bakar", jumlah: 2 },
+    { jenis: "minuman", nama: "Es Teh", jumlah: 1 }
+];
+
+const pesananAmbaRoni = [
+    { jenis: "makanan", nama: "Ayam Puk Puk (Bukan digeprek)", jumlah: 1 },
+    { jenis: "minuman", nama: "Es Teh", jumlah: 3 }
+];
+
+const pesananFaizNgawi = [
+    { jenis: "makanan", nama: "Ayam", jumlah: 1 },
+    { jenis: "makanan", nama: "Ayam Puk Puk (Bukan digeprek)", jumlah: 1 },
+    { jenis: "makanan", nama: "Ayam Bakar", jumlah: 1 },
+    { jenis: "minuman", nama: "Es Teh", jumlah: 1 },
+    { jenis: "minuman", nama: "Es Jeruk", jumlah: 1 }
+];
+
+
+function hitungPajak(pesanan){
+    total = 0 ;
+    pesanan.forEach(e => {
+        var cari = Menu[e.jenis].find(j => j.nama == e.nama)
+        let subTotal = cari.harga * e.jumlah;
+
+        if (e.jenis == "makanan") {
+            subTotal += subTotal * 0.05;
+        } else if (e.jenis == "minuman") {
+            subTotal += subTotal * 0.03; 
+        }
+
+        total += subTotal;
+        total += total * 0.15;
+    });
+    return Math.round(total);
+}
+
+console.log(hitungPajak(pesananRehan));
+console.log(hitungPajak(pesananAmbaRoni));
+console.log(hitungPajak(pesananFaizNgawi));

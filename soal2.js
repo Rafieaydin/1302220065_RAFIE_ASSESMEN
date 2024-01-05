@@ -1,8 +1,11 @@
-// no 2
-var word = ["Angsa","KataK","kasur empuk","Aku suka kamu", "ibu ratna antar ubi"];
 
-console.log("soal no 2");
-for (let i = 0; i < word.length; i++) {
-    var mid = word[i].split('').reverse().join('');
-    console.log( (mid == word[i]) ? "eureeka!" : "suka blyat");
-}
+document.getElementById("submit").addEventListener("click", function(e){
+    e.preventDefault();
+    input = document.querySelector(".input");
+    output = input.value.split("").reverse().join("");
+    if (output == input.value){
+        document.getElementById("output").innerHTML = "Your input is a palindrome!";
+    }else{
+        document.getElementById("output").innerHTML = "Your input is not a palindrome!";
+    }
+})
